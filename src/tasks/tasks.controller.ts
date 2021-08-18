@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
+import { TasksService } from 'src/tasks/tasks.service';
 
 @Controller('tasks')
-export class TasksController {}
+export class TasksController {
+  constructor(private tasksService: TasksService) {}
+}
