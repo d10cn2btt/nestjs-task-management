@@ -13,7 +13,7 @@ import { TasksModule } from './tasks/tasks.module';
       password: 'postgres',
       database: 'task-management',
       autoLoadEntities: true,
-      synchronize: true,
+      // synchronize: true,
     }),
   ],
 })
