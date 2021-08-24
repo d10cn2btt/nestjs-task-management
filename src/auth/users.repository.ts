@@ -11,14 +11,12 @@ export class UsersRepository extends Repository<User> {
     const { username, password } = authCredentialsDto;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(salt, hashedPassword);
 
     const user = this.create({ username, password: hashedPassword });
     try {
       await this.save(user);
     } catch (e) {
       if (parseInt(e.code) === 23505) {
-        // duplicate username
         throw new ConflictException('Username already exists');
       }
 
