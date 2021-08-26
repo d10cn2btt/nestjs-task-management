@@ -16,7 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: 'secretWoman',
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
-    console.log('123');
   }
 
   async validate(payload: JwtPayload): Promise<User> {
