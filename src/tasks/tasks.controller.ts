@@ -10,7 +10,7 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 
 @Controller('tasks')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class TasksController {
   private logger = new Logger('TasksController', { timestamp: true });
 
@@ -21,6 +21,11 @@ export class TasksController {
     this.logger.verbose(`User ${user.username} retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
 
     return this.tasksService.getTasks(filterDto, user);
+  }
+
+  @Get('env')
+  checkEnv() {
+    return process.env;
   }
 
   @Get(':id')
