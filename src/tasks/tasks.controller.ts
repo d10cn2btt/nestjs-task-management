@@ -10,7 +10,7 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 
 @Controller('tasks')
-// @UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class TasksController {
   private logger = new Logger('TasksController', { timestamp: true });
 
@@ -52,7 +52,8 @@ export class TasksController {
     @Body() updateTaskStatus: UpdateTaskDto,
     @GetUser() user: User,
   ): Promise<Task> {
-    const { status } = updateTaskStatus;
+    const { status, description } = updateTaskStatus;
+    console.log(updateTaskStatus);
 
     return this.tasksService.updateTaskStatus(id, status, user);
   }

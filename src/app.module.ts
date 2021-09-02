@@ -4,6 +4,8 @@ import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
+import { User } from 'src/auth/user.entity';
+import { Task } from 'src/tasks/task.entity';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { configValidationSchema } from './config.schema';
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
           autoLoadEntities: true,
+          // entities: [User, Task],
           synchronize: true,
         };
       },
