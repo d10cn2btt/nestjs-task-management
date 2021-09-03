@@ -5,6 +5,7 @@ import { TaskStatus } from 'src/tasks/task-status.enum';
 import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
 import { User } from 'src/users/user.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @EntityRepository(Task)
 export class TasksRepository extends Repository<Task> {
