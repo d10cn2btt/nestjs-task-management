@@ -4,7 +4,7 @@ import { TasksRepository } from 'src/tasks/tasks.repository';
 import { Task } from 'src/tasks/task.entity';
 import { TaskStatus } from 'src/tasks/task-status.enum';
 import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/users/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
 
 // The @Injectable() decorator declares the TasksService class as a class that can be managed by the Nest IoC container.
