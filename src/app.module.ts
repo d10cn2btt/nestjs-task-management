@@ -10,6 +10,7 @@ import { Task } from 'src/tasks/task.entity';
 import { UsersModule } from './users/users.module';
 import { LoggerConfig } from 'src/config/logger.config';
 import { TypeOrmConfig } from 'src/config/type-orm.config';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { TypeOrmConfig } from 'src/config/type-orm.config';
     AuthModule,
     UsersModule,
     TasksModule,
+    FilesModule,
   ],
 })
 export class AppModule {}
