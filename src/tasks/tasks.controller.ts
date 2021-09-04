@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 import { DeleteResult } from 'typeorm';
 import { TasksService } from 'src/tasks/tasks.service';
 import { CreateTaskDto } from 'src/tasks/dto/create-task.dto';
@@ -12,13 +14,13 @@ import { User } from 'src/users/user.entity';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
-  private logger = new Logger('TasksController', { timestamp: true });
-
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksService: TasksService, @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
 
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto, @GetUser() user: User) {
-    this.logger.verbose(`User ${user.username} retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
+    this.logger.info('Calling getHello()', { controller: TasksController.name });
+    this.logger.debug('Calling getHello()', { controller: TasksController.name });
+    this.logger.verbose('warning');
 
     return this.tasksService.getTasks(filterDto, user);
   }

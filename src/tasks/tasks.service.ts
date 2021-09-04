@@ -11,7 +11,7 @@ import { Cron, CronExpression, Interval } from '@nestjs/schedule';
 // The @Injectable() decorator declares the TasksService class as a class that can be managed by the Nest IoC container.
 @Injectable()
 export class TasksService {
-  private logger = new Logger('TasksService');
+  // private logger = new Logger('TasksService');
 
   constructor(private tasksRepository: TasksRepository) {}
 

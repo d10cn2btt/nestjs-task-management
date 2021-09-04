@@ -1,15 +1,16 @@
 import { EntityRepository, Repository } from 'typeorm';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Task } from 'src/tasks/task.entity';
 import { CreateTaskDto } from 'src/tasks/dto/create-task.dto';
 import { TaskStatus } from 'src/tasks/task-status.enum';
 import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
 import { User } from 'src/users/user.entity';
-import { InternalServerErrorException, Logger } from '@nestjs/common';
+import { Inject, InternalServerErrorException, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @EntityRepository(Task)
 export class TasksRepository extends Repository<Task> {
-  private logger = new Logger('TasksRepository');
+  @Inject(WINSTON_MODULE_PROVIDER) private logger = new Logger('TasksRepository');
 
   async getTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
     const { status, search } = filterDto;
