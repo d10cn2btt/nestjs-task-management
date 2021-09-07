@@ -10,11 +10,21 @@ import { Task } from 'src/tasks/task.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
+import { Roles, ROLES_KEY } from 'src/auth/roles.decorator';
+import { Role } from 'src/auth/role.enum';
+import { Reflector } from '@nestjs/core';
+import { RolesGuard } from 'src/auth/roles.guard';
 
 @Controller('tasks')
-@UseGuards(AuthGuard())
+// AuthGuard must be run before roleGuard
+@UseGuards(AuthGuard(), RolesGuard)
+@Roles(Role.User)
 export class TasksController {
-  constructor(private tasksService: TasksService, @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
+  constructor(
+    private tasksService: TasksService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
+    private reflector: Reflector,
+  ) {}
 
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto, @GetUser() user: User) {
@@ -26,12 +36,22 @@ export class TasksController {
   }
 
   @Get('env')
+  @Roles(Role.User)
   checkEnv() {
     return process.env;
   }
 
   @Get(':id')
+  @Roles(Role.Admin)
   getTaskById(@Param('id') id: string, @GetUser() user: User): Promise<Task> {
+    console.log(this.reflector.get(ROLES_KEY, this.checkEnv));
+    console.log(this.reflector.getAll(ROLES_KEY, [this.checkEnv, this.createTask, this.getTaskById, TasksController]));
+    console.log(
+      this.reflector.getAllAndOverride(ROLES_KEY, [this.getTaskById, this.checkEnv, this.createTask, TasksController]),
+    );
+    console.log(
+      this.reflector.getAllAndMerge(ROLES_KEY, [this.checkEnv, this.createTask, this.getTaskById, TasksController]),
+    );
     return this.tasksService.getTaskById(id, user);
   }
 

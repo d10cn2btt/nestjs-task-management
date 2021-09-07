@@ -21,6 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload): Promise<User> {
+    console.log('validate. Pls make sure this function will run before role guard!!');
     const { username } = payload;
     const user: User = await this.usersRepository.findOne({ username });
 
