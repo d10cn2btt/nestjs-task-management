@@ -8,10 +8,10 @@ import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
 import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
 import { Task } from 'src/tasks/task.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
+import { GetUser } from 'src/common/decorators/get-user.decorator';
 import { User } from 'src/users/user.entity';
-import { Roles, ROLES_KEY } from 'src/auth/roles.decorator';
-import { Role } from 'src/auth/role.enum';
+import { Roles, ROLES_KEY } from 'src/common/decorators/roles.decorator';
+import { Role } from 'src/common/enums/role.enum';
 import { Reflector } from '@nestjs/core';
 import { RolesGuard } from 'src/auth/roles.guard';
 

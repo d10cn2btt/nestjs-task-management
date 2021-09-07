@@ -5,7 +5,7 @@ import { Task } from 'src/tasks/task.entity';
 import { TaskStatus } from 'src/tasks/task-status.enum';
 import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
 import { User } from 'src/users/user.entity';
-import { GetUser } from 'src/auth/get-user.decorator';
+import { GetUser } from 'src/common/decorators/get-user.decorator';
 import { Cron, CronExpression, Interval } from '@nestjs/schedule';
 
 // The @Injectable() decorator declares the TasksService class as a class that can be managed by the Nest IoC container.
