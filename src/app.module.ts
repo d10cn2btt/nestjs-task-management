@@ -13,6 +13,8 @@ import { TypeOrmConfig } from 'src/config/type-orm.config';
 import { FilesModule } from './files/files.module';
 import { LoggerMiddleware } from 'src/common/middleware/logger.middleware';
 import { AuthController } from 'src/auth/auth.controller';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 
 @Module({
   imports: [
@@ -69,6 +71,12 @@ import { AuthController } from 'src/auth/auth.controller';
     UsersModule,
     TasksModule,
     FilesModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
   ],
 })
 export class AppModule implements NestModule {
