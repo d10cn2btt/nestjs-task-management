@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WinstonModule } from 'nest-winston';
 import { TasksModule } from './tasks/tasks.module';
@@ -11,6 +11,8 @@ import { UsersModule } from './users/users.module';
 import { LoggerConfig } from 'src/config/logger.config';
 import { TypeOrmConfig } from 'src/config/type-orm.config';
 import { FilesModule } from './files/files.module';
+import { LoggerMiddleware } from 'src/common/middleware/logger.middleware';
+import { AuthController } from 'src/auth/auth.controller';
 
 @Module({
   imports: [
@@ -69,4 +71,8 @@ import { FilesModule } from './files/files.module';
     FilesModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes(AuthController);
+  }
+}
