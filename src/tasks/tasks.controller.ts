@@ -35,10 +35,13 @@ export class TasksController {
     return this.tasksService.getTasks(filterDto, user);
   }
 
-  @Get('env')
+  @Get('env/:id')
   @Roles(Role.User)
-  checkEnv() {
-    return process.env;
+  checkEnv(@Param('id') id: number) {
+    return {
+      env: process.env,
+      id,
+    };
   }
 
   @Get(':id')
@@ -56,7 +59,8 @@ export class TasksController {
   }
 
   @Post()
-  createTask(@GetUser() user: User, @Body() createTaskDto: CreateTaskDto): Promise<Task> {
+  createTask(@GetUser() user: User, @Body() createTaskDto: CreateTaskDto) {
+    return 123;
     return this.tasksService.createTask(createTaskDto, user);
   }
 
