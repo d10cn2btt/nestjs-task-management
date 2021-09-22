@@ -45,6 +45,18 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running with pm2
+```bash
+# build
+yarn build
+
+# run pm2
+pm2 start --env development
+
+# reload pm2
+pm2 reload all
+```
+
 ## Test
 
 ```bash
