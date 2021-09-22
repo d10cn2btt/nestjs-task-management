@@ -6,10 +6,12 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
+import { imageFileFilter } from 'src/files/dto/image.dto';
+import { FileS3Service } from 'src/files/file.s3.service';
 
 @Controller('files')
 export class FilesController {
-  constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
+  constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger, private fileS3Service: FileS3Service) {}
 
   @Get('download')
   getFile(@Res() res) {
@@ -43,10 +45,20 @@ export class FilesController {
   }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file_csv'))
+  @UseInterceptors(
+    FileInterceptor('file_csv', {
+      fileFilter: imageFileFilter,
+    }),
+  )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log('upload file');
     this.logger.info('log via logger');
     return { file };
+  }
+
+  @Post('upload-s3')
+  @UseInterceptors(FileInterceptor('file_s3'))
+  async uploadFileS3(@UploadedFile() file: Express.Multer.File) {
+    return await this.fileS3Service.uploadFile(file.buffer, file.originalname);
   }
 }
