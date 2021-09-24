@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { UsersRepository } from 'src/users/users.repository';
-import { JwtStrategy } from 'src/auth/jwt.strategy';
+import { AuthService } from 'src/app/auth/auth.service';
+import { AuthController } from 'src/app/auth/auth.controller';
+import { UsersRepository } from 'src/app/users/users.repository';
+import { JwtStrategy } from 'src/app/auth/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({

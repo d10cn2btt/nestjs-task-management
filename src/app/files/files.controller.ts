@@ -6,8 +6,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { imageFileFilter } from 'src/files/dto/image.dto';
-import { FileS3Service } from 'src/files/file.s3.service';
+import { imageFileFilter } from 'src/app/files/dto/image.dto';
+import { FileS3Service } from 'src/app/files/file.s3.service';
 
 @Controller('files')
 export class FilesController {

@@ -1,10 +1,10 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
-import { Task } from 'src/tasks/task.entity';
-import { CreateTaskDto } from 'src/tasks/dto/create-task.dto';
-import { TaskStatus } from 'src/tasks/task-status.enum';
-import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
-import { User } from 'src/users/user.entity';
+import { Task } from 'src/app/tasks/task.entity';
+import { CreateTaskDto } from 'src/app/tasks/dto/create-task.dto';
+import { TaskStatus } from 'src/app/tasks/task-status.enum';
+import { GetTasksFilterDto } from 'src/app/tasks/dto/get-tasks-filter.dto';
+import { User } from 'src/app/users/user.entity';
 import { Inject, InternalServerErrorException, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 

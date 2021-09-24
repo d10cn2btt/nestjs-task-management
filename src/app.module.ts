@@ -1,20 +1,21 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WinstonModule } from 'nest-winston';
-import { TasksModule } from './tasks/tasks.module';
-import { AuthModule } from './auth/auth.module';
+import { TasksModule } from './app/tasks/tasks.module';
+import { AuthModule } from './app/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
-import { User } from 'src/users/user.entity';
-import { Task } from 'src/tasks/task.entity';
-import { UsersModule } from './users/users.module';
+import { User } from 'src/app/users/user.entity';
+import { Task } from 'src/app/tasks/task.entity';
+import { UsersModule } from './app/users/users.module';
 import { LoggerConfig } from 'src/config/logger.config';
 import { TypeOrmConfig } from 'src/config/type-orm.config';
-import { FilesModule } from './files/files.module';
+import { FilesModule } from './app/files/files.module';
 import { LoggerMiddleware } from 'src/common/middleware/logger.middleware';
-import { AuthController } from 'src/auth/auth.controller';
+import { AuthController } from 'src/app/auth/auth.controller';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
+import { MailModule } from './app/mail/mail.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
     UsersModule,
     TasksModule,
     FilesModule,
+    MailModule,
   ],
   providers: [
     {

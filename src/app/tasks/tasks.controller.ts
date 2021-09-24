@@ -2,18 +2,18 @@ import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Query, UseGuar
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 import { DeleteResult } from 'typeorm';
-import { TasksService } from 'src/tasks/tasks.service';
-import { CreateTaskDto } from 'src/tasks/dto/create-task.dto';
-import { GetTasksFilterDto } from 'src/tasks/dto/get-tasks-filter.dto';
-import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
-import { Task } from 'src/tasks/task.entity';
+import { TasksService } from 'src/app/tasks/tasks.service';
+import { CreateTaskDto } from 'src/app/tasks/dto/create-task.dto';
+import { GetTasksFilterDto } from 'src/app/tasks/dto/get-tasks-filter.dto';
+import { UpdateTaskDto } from 'src/app/tasks/dto/update-task.dto';
+import { Task } from 'src/app/tasks/task.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/common/decorators/get-user.decorator';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/app/users/user.entity';
 import { Roles, ROLES_KEY } from 'src/common/decorators/roles.decorator';
 import { Role } from 'src/common/enums/role.enum';
 import { Reflector } from '@nestjs/core';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { RolesGuard } from 'src/app/auth/roles.guard';
 
 @Controller('tasks')
 // AuthGuard must be run before roleGuard

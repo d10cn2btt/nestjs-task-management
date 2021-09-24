@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards, Inject } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/common/decorators/get-user.decorator';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/app/users/user.entity';
 import { WINSTON_MODULE_NEST_PROVIDER, WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 

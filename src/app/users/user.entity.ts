@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Task } from 'src/tasks/task.entity';
+import { Task } from 'src/app/tasks/task.entity';
 import { Exclude, Expose, Transform } from 'class-transformer';
 
 @Entity()
