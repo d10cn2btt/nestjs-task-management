@@ -8,7 +8,9 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 import { imageFileFilter } from 'src/app/files/dto/image.dto';
 import { FileS3Service } from 'src/app/files/file.s3.service';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('files')
 @Controller('files')
 export class FilesController {
   constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger, private fileS3Service: FileS3Service) {}

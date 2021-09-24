@@ -57,6 +57,11 @@ pm2 start --env development
 pm2 reload all
 ```
 
+## Swagger
+```bash
+Run local. Goto {DOMAIN}/api-swagger
+```
+
 ## Test
 
 ```bash

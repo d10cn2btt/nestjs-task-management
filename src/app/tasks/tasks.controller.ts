@@ -14,7 +14,9 @@ import { Roles, ROLES_KEY } from 'src/common/decorators/roles.decorator';
 import { Role } from 'src/common/enums/role.enum';
 import { Reflector } from '@nestjs/core';
 import { RolesGuard } from 'src/app/auth/roles.guard';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('tasks')
 @Controller('tasks')
 // AuthGuard must be run before roleGuard
 @UseGuards(AuthGuard(), RolesGuard)
@@ -26,6 +28,7 @@ export class TasksController {
     private reflector: Reflector,
   ) {}
 
+  @ApiBody({ type: [GetTasksFilterDto] })
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto, @GetUser() user: User) {
     this.logger.info('Calling getHello()', { controller: TasksController.name });

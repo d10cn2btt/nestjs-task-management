@@ -5,7 +5,10 @@ import { User } from 'src/app/users/user.entity';
 import { WINSTON_MODULE_NEST_PROVIDER, WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 import { MailService } from 'src/mail/mail.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth('access-token')
+@ApiTags('users')
 @Controller('users')
 @UseGuards(AuthGuard())
 export class UsersController {
